@@ -1,6 +1,5 @@
 # Django Borrow Book from Library
 
-
 BookBorrow is a web-based application built using Django and styled with Bootstrap, designed to streamline the process of borrowing and managing books from a library. It serves as a centralized platform for users, admin librarians, and administrators to interact efficiently and effectively.
 
 ## Features
