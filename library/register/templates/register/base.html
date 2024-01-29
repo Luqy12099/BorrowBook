@@ -54,7 +54,9 @@
     <div class="sidebar">
         <ul class="list-unstyled ps-0">
             <li class="mb-1"><a href="/" class="link-light rounded">Home</a></li>
-            <li class="mb-1"><a href="/todolist" class="link-light rounded">ToDo</a></li>
+            {% if user.role == 'superadmin' %}
+                <li class="mb-1"><a href="/user" class="link-light rounded">User</a></li>
+            {% endif %}
             <li class="mb-1"><a href="/logout_view" class="link-light rounded">Logout</a></li>
         </ul>
     </div>
