@@ -10,6 +10,30 @@ Edit user
 <form method="post">
     {% csrf_token %}
     {{ form|crispy }}
+    <div id="admin-details" style="display: none;">
+        {{ form2|crispy }}
+    </div>
     <button type="submit" name="edit_user" value="edit_user" class="btn btn-success">Edit</button>
 </form>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Async form2
+    $(document).ready(function() {
+        $('#id_role').change(function() {
+            var selectedRole = $(this).val();
+            if (selectedRole === 'admin') {
+                $('#admin-details').show();
+                $('#id_library_location').prop('required', true);
+            } else {
+                $('#admin-details').hide();
+                $('#id_library_location').prop('required', false);
+            }
+        });
+
+        $('#id_role').trigger('change');
+    });
+</script>
 {% endblock %}

@@ -11,6 +11,15 @@ BookBorrow is a web-based application built using Django and styled with Bootstr
 - Login
 - Management User
     This feature only for superadmin
+    - read, update (including update role), and delete user
+    - if 'admin' role choosen, it will be additional form and add to new database admin (still have relational with user) 
+- Location
+    - Read location
+    - Create location
+        - Only for superadmin
+    - Update location
+        - Only for superadmin and admin
+        - Admin can only update related location
 
 ## Technologies Used
 

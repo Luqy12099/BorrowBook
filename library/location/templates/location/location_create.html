@@ -1,0 +1,15 @@
+{% extends 'register/base.html'%}
+
+{% block tittle %}
+Create Library
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" name="add_library" value="add_library" class="btn btn-success">Create Library</button>
+</form>
+{% endblock %}

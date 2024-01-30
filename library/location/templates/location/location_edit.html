@@ -1,0 +1,15 @@
+{% extends 'register/base.html'%}
+
+{% block tittle %}
+Edit Location
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" name="edit_location" value="edit_location" class="btn btn-success">Edit</button>
+</form>
+{% endblock %}
