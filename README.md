@@ -20,6 +20,13 @@ BookBorrow is a web-based application built using Django and styled with Bootstr
     - Update location
         - Only for superadmin and admin
         - Admin can only update related location
+- Book
+    - CRUD Author
+        - Delete Only for superadmin
+        - Create and Update only for superadmin and admin
+    - CRUD Genre
+        - Delete Only for superadmin
+        - Create and Update only for superadmin and admin
 
 ## Technologies Used
 

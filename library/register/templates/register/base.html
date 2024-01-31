@@ -30,6 +30,9 @@
         .sidebar a:hover {
             color: #f1f1f1;
         }
+        .sidebar .fas {
+            color: white;
+        }
 
         .main {
             margin-left: 250px;
@@ -42,7 +45,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block tittle %} Base tittle {% endblock %}</title>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
@@ -52,13 +55,50 @@
 
 <body>
     <div class="sidebar">
-        <ul class="list-unstyled ps-0">
-            <li class="mb-1"><a href="/" class="link-light rounded">Home</a></li>
-            <li class="mb-1"><a href="/location" class="link-light rounded">Location</a></li>
+        <ul class="list-unstyled">
+            <li class="mb-1">
+              <a href="/" class="link-light rounded">
+                <i class="fas fa-home"></i>
+                Home
+              </a>
+            </li>
+            <li class="mb-1">
+              <a href="/location" class="link-light rounded">
+                <i class="fas fa-map-marker-alt"></i>
+                Location
+              </a>
+            </li>
+
+            <li class="mb-1">
+                <a href="#catalogSubMenu" data-bs-toggle="collapse" class="nav-link link-light rounded">
+                    <i class="fas fa-book text-white"></i> <!-- Catalog icon with text-white class -->
+                    Catalog
+                    <i class="fas fa-chevron-down float-end text-white"></i> <!-- Submenu indicator icon styled as white -->
+                </a>
+
+                <ul class="collapse list-unstyled" id="catalogSubMenu">
+                    <li><a href="/author" class="link-light rounded">Author</a></li>
+                </ul>
+                <ul class="collapse list-unstyled" id="catalogSubMenu">
+                  <li><a href="/genre" class="link-light rounded">Genre</a></li>
+              </ul>
+            </li>
+
             {% if user.role == 'superadmin' %}
-                <li class="mb-1"><a href="/user" class="link-light rounded">User</a></li>
+            <li class="mb-1">
+              <a href="/user" class="link-light rounded">
+                <i class="fas fa-user"></i>
+                User
+              </a>
+            </li>
             {% endif %}
-            <li class="mb-1"><a href="/logout_view" class="link-light rounded">Logout</a></li>
+
+            <li class="mb-1">
+              <a href="/logout_view" class="link-light rounded">
+                <i class="fa fa-right-from-bracket"></i>
+                Logout
+              </a>
+            </li>
         </ul>
     </div>
 

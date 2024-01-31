@@ -1,0 +1,74 @@
+{% extends 'register/base.html'%}
+
+{% block tittle %}
+Genre
+{% endblock %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-8">
+        <h1 class="m-0 text-dark">Genre</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-4" style="padding-top: 10px;">
+        {% if user.role == 'superadmin' or user.role == 'admin' %}
+        <a class="btn btn-primary" href="http://127.0.0.1:8000/genre/create/">Create New</a>
+        {% endif %}
+          
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+
+<section class="content">
+<div class="container-fluid">
+
+<table id = "myTable" class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Genre</th>
+        {% if user.role == 'superadmin' or user.role == 'admin' %}
+        <th scope="col">Action</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+        {% for item in data %}
+        {% with forloop.counter as n %}
+        <tr>
+            <th scope="row">{{ n }}</th>
+            <td>
+              {{ item.name }}
+            </td>
+  
+            {% if user.role == 'superadmin' or user.role == 'admin' %}
+            <td>
+              <div class="btn-group">
+                <a href="http://127.0.0.1:8000/genre/{{item.id}}" class="btn btn-primary btn-sm">
+                    <i class="nav-icon fas fa-edit"></i> Edit
+                </a>
+                <form method="POST" action="{% url 'genre_delete' id=item.id %}">
+                  {% csrf_token %}
+                  <input type="hidden" name="is_delete" value="True">
+                  <button type="submit" class="btn btn-danger btn-sm ml-1" onclick="return confirm('Anda Yakin?')">
+                  <i class="nav-icon fas fa-trash"></i> Delete</button>
+                </form>
+            </div>
+            </td>
+            {% endif %}
+        </tr>
+        {% endwith %}
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
+</section>
+
+
+{% endblock %}
+

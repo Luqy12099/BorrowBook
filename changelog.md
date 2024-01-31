@@ -2,6 +2,58 @@
 <b>Full Changelog</b>
 
 ---
+#### v 0.0.4 -- 2024/01/31
+###### New:
+* Make django app (book)
+* Add model (book/author)
+* Add model (book/author) to admin
+* Add book\form.py class "form_create_author", "form_edit_author"
+
+* Add model (book/genre)
+* Add model (book/genre) to admin
+* Add book\form.py class "form_create_genre", "form_edit_genre"
+
+* API (views)
+    * book/author_read
+    * book/author_create
+    * book/author_update
+    * book/author_delete
+    * book/genre_read
+    * book/genre_create
+    * book/genre_update
+    * book/genre_delete
+* urls
+    * author/
+    * author/create
+    * author/<int:id>/
+    * author/<int:id>/delete/
+    * genre/
+    * genre/create
+    * genre/<int:id>/
+    * genre/<int:id>/delete/
+* Templates 
+    * book/author_read
+    * book/author_create
+    * book/author_edit
+    * book/genre_read
+    * book/genre_create
+    * book/genre_edit
+
+###### Change:
+* Lainnya :
+    * settings.py 
+        * Add INSTALLED_APPS ['book.apps.BookConfig', ]
+    * library\urls.py
+        * Add path('', include("book.urls")),
+    * register\base.html
+        * Add catalog sidebar with submenu
+            * Submenu author
+            * Submenu genre
+        * Add stylesheet for icon
+        * Add style
+        * Add icon in each item sidebar
+
+---
 #### v 0.0.3 -- 2024/01/30
 ###### New:
 * Make django app (location)
@@ -47,7 +99,6 @@
     * library\urls.py
         * Add path('location/', include("location.urls")),
     
-
 ---
 #### v 0.0.2 -- 2024/01/29
 ###### New:

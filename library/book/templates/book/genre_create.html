@@ -1,0 +1,15 @@
+{% extends 'register/base.html'%}
+
+{% block tittle %}
+Create Genre
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" name="add_genre" value="add_genre" class="btn btn-success">Create Genre</button>
+</form>
+{% endblock %}
