@@ -2,6 +2,50 @@
 <b>Full Changelog</b>
 
 ---
+#### v 0.0.5 -- 2024/02/02
+###### New:
+* Add model (book/publisher)
+* Add model (book/publisher) to admin
+* Add book\form.py class "form_create_publisher", "form_edit_publisher"
+
+* Add model (book/book)
+* Add model (book/book) to admin
+* Add book\form.py class "form_create_book", "form_edit_book"
+
+* API (views)
+    * book/publisher_read
+    * book/publisher_create
+    * book/publisher_update
+    * book/publisher_delete
+    * book/book_read
+    * book/book_create
+    * book/book_update
+    * book/book_delete
+* urls
+    * publisher/
+    * publisher/create
+    * publisher/<int:id>/
+    * publisher/<int:id>/delete/
+    * book/
+    * book/create
+    * book/<int:id>/
+    * book/<int:id>/delete/
+* Templates 
+    * book/publisher_read
+    * book/publisher_create
+    * book/publisher_edit
+    * book/book_read
+    * book/book_create
+    * book/publisher_edit
+
+###### Change:
+* Lainnya :
+    * register\base.html
+        * Submenu publisher
+        * Submenu book
+
+
+---
 #### v 0.0.4 -- 2024/01/31
 ###### New:
 * Make django app (book)

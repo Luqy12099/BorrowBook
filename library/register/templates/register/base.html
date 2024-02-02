@@ -77,11 +77,17 @@
                 </a>
 
                 <ul class="collapse list-unstyled" id="catalogSubMenu">
+                  <li><a href="/book" class="link-light rounded">Book</a></li>
+                </ul>
+                <ul class="collapse list-unstyled" id="catalogSubMenu">
                     <li><a href="/author" class="link-light rounded">Author</a></li>
                 </ul>
                 <ul class="collapse list-unstyled" id="catalogSubMenu">
                   <li><a href="/genre" class="link-light rounded">Genre</a></li>
-              </ul>
+                </ul>
+                <ul class="collapse list-unstyled" id="catalogSubMenu">
+                  <li><a href="/publisher" class="link-light rounded">Publisher</a></li>
+                </ul>
             </li>
 
             {% if user.role == 'superadmin' %}

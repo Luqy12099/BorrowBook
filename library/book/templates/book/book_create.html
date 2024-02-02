@@ -1,0 +1,16 @@
+{% extends 'register/base.html'%}
+
+{% block tittle %}
+Create Book
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" name="add_book" value="add_book" class="btn btn-success">Create Book</button>
+</form>
+
+{% endblock %}
