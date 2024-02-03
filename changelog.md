@@ -2,6 +2,20 @@
 <b>Full Changelog</b>
 
 ---
+#### v 0.0.6 -- 2024/02/03
+###### New:
+* Add model (book/stock)
+* Add model (book/sock) to admin
+* Add book\form.py class "form_create_stock",
+
+###### Change:
+* API (views):
+    * book/book_create
+        * Add form2 (stock)
+* Templates 
+    * book/book_create
+        * Add form2 (stock)
+---
 #### v 0.0.5 -- 2024/02/02
 ###### New:
 * Add model (book/publisher)
@@ -36,7 +50,7 @@
     * book/publisher_edit
     * book/book_read
     * book/book_create
-    * book/publisher_edit
+    * book/book_edit
 
 ###### Change:
 * Lainnya :

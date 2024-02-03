@@ -1,5 +1,7 @@
 from django import forms
-from .models import author, genre, publisher, book
+from .models import author, genre, publisher, book, stock
+from location.models import library_location
+from managementUser.models import admin_library
 
 #region ================================= AUTHOR AREA ==========================================================================
 
@@ -102,6 +104,20 @@ class form_create_book(forms.ModelForm):
         model = book
         fields = ['tittle', 'author', 'genre', 'publisher', 'total_page', 'isbn', 'published_date']
 
+
+class form_create_stock(forms.ModelForm):
+    decsription = forms.CharField(required=False, label= "Description")
+
+    class Meta:
+        model = stock
+        fields = ['library_location', 'stock', 'decsription']
+    
+    def __init__(self, user, *args, **kwargs):
+        super(form_create_stock, self).__init__(*args, **kwargs)
+        if user.role == 'admin':
+            admin_libraries = admin_library.objects.filter(user=user)
+            library_locations = [admin_lib.library_location for admin_lib in admin_libraries]
+            self.fields['library_location'].queryset = library_location.objects.filter(name__in=library_locations)
 
 
 

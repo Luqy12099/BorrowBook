@@ -1,8 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from .models import author as auth, genre, publisher, book
+from .models import author as auth, genre, publisher, book, stock
+from location.models import library_location
+from managementUser.models import admin_library as admin_library_model
 from .form import form_create_author, form_edit_author, form_create_genre, form_edit_genre
 from .form import form_create_publisher, form_edit_publisher, form_create_book, form_edit_book
+from .form import form_create_stock
 # Create your views here.
 
 #region ================================= AUTHOR AREA ==========================================================================
@@ -195,13 +198,30 @@ def book_create(response):
     
     if response.method == "POST":
         form = form_create_book(response.POST)
+        form2 = form_create_stock(user=response.user, data=response.POST)
+
         if form.is_valid():
             instance = form.save(commit=False)  # Prevent premature saving
             instance.save()
+
+            if form2.is_valid():
+                stock_instance = form2.save(commit=False) # Prevent premature saving
+                stock_instance.book = instance
+                
+                if not stock_instance.decsription:
+                    stock_instance.decsription = ''  # Set to None for empty strings
+
+                stock_instance.save()
+
+            else:
+                return redirect('book_read')
+            
             return redirect('book_read')
+        
     else:
         form = form_create_book()
-    return render(response, "book/book_create.html", {"form":form})
+        form2 = form_create_stock(user=response.user)
+    return render(response, "book/book_create.html", {"form":form, "form2":form2})
 
 @login_required()
 def book_update(response, id):

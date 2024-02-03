@@ -10,6 +10,7 @@ Create Book
 <form method="post">
     {% csrf_token %}
     {{ form|crispy }}
+    {{ form2|crispy }}
     <button type="submit" name="add_book" value="add_book" class="btn btn-success">Create Book</button>
 </form>
 
