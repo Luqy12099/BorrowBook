@@ -2,19 +2,40 @@
 <b>Full Changelog</b>
 
 ---
-#### v 0.0.6 -- 2024/02/03
+#### v 0.0.6 -- 2024/02/04
 ###### New:
-* Add model (book/stock)
-* Add model (book/sock) to admin
-* Add book\form.py class "form_create_stock",
 
 ###### Change:
 * API (views):
     * book/book_create
-        * Add form2 (stock)
+        * Add argument user from object response.user
+        * Only admin library from book.library_location can add (Prevent unauthorization library admins)
+    * book/book_update
+        * Add argument user from object response.user
+        * Only admin library from book.library_location can edit
+
 * Templates 
-    * book/book_create
-        * Add form2 (stock)
+    * book/book_read
+        * Add library location and stock in detail
+    * book/author_read
+        * Change login in Author Name
+
+* Lainnya :
+    * book\model\book
+        * Add field library_location (foreignkey)
+        * Add field stock
+    * book\form\form_create_book
+        * Add field stock
+        * Add field library_location (foreignkey)
+            * Admin library can add book into another library location
+    * book\form\form_edit_book
+        * Add field stock
+        * Add field library_location (foreignkey)
+            * Admin library can change library location into another
+    * book\model\author
+        * Add null=True in field middle_name
+        * Change return to full name
+
 ---
 #### v 0.0.5 -- 2024/02/02
 ###### New:

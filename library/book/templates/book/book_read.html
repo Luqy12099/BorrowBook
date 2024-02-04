@@ -49,6 +49,8 @@ Book
               Publisher : {{ item.publisher }} <br> 
               Total Page : {{ item.total_page|default:'-' }} <br>
               ISBN : {{ item.isbn|default:'-' }} <br> 
+              Location : {{ item.library_location }} <br> 
+              Availability : {{ item.stock }} <br> 
             </td>
   
             {% if user.role == 'superadmin' or user.role == 'admin' %}

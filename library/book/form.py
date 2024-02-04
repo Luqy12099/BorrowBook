@@ -1,5 +1,5 @@
 from django import forms
-from .models import author, genre, publisher, book, stock
+from .models import author, genre, publisher, book
 from location.models import library_location
 from managementUser.models import admin_library
 
@@ -85,16 +85,24 @@ class form_create_book(forms.ModelForm):
     author = forms.ModelChoiceField(queryset=author.objects.all(), label="Author")
     genre = forms.ModelChoiceField(queryset=genre.objects.all(), label= "Genre")
     publisher = forms.ModelChoiceField(queryset=publisher.objects.all(), label= "Publisher")
-    
+    library_location = forms.ModelChoiceField(queryset=library_location.objects.all(), label= "Library")
+
+    stock = forms.IntegerField(label= "Number of Book")
     total_page = forms.IntegerField(required=False, label= "Total Page")
     isbn = forms.CharField(required=False, label= "ISBN")
     published_date = forms.DateField(required=False, label= "Published Date", widget=forms.DateInput(attrs={'type': 'date'}))
 
     # python constructor
-    def __init__(self, *args, **kwargs):
+    def __init__(self, user, *args, **kwargs):
         super(form_create_book, self).__init__(*args, **kwargs)
+        
         # Customize the label of each choice in the dropdown
         self.fields['author'].label_from_instance = self.label_from_author_instance
+
+        if user.role == 'admin':
+            admin_libraries = admin_library.objects.filter(user=user)
+            library_locations = [admin_lib.library_location for admin_lib in admin_libraries]
+            self.fields['library_location'].queryset = library_location.objects.filter(name__in=library_locations)
 
     def label_from_author_instance(self, obj):
         # Customize how each author instance is displayed in the dropdown
@@ -102,23 +110,8 @@ class form_create_book(forms.ModelForm):
 
     class Meta:
         model = book
-        fields = ['tittle', 'author', 'genre', 'publisher', 'total_page', 'isbn', 'published_date']
-
-
-class form_create_stock(forms.ModelForm):
-    decsription = forms.CharField(required=False, label= "Description")
-
-    class Meta:
-        model = stock
-        fields = ['library_location', 'stock', 'decsription']
-    
-    def __init__(self, user, *args, **kwargs):
-        super(form_create_stock, self).__init__(*args, **kwargs)
-        if user.role == 'admin':
-            admin_libraries = admin_library.objects.filter(user=user)
-            library_locations = [admin_lib.library_location for admin_lib in admin_libraries]
-            self.fields['library_location'].queryset = library_location.objects.filter(name__in=library_locations)
-
+        fields = ['tittle', 'author', 'genre', 'publisher','library_location', 'stock',
+                   'total_page', 'isbn', 'published_date']
 
 
 class form_edit_book(forms.ModelForm):
@@ -134,16 +127,23 @@ class form_edit_book(forms.ModelForm):
     author = forms.ModelChoiceField(queryset=author.objects.all(), label="Author")
     genre = forms.ModelChoiceField(queryset=genre.objects.all(), label= "Genre")
     publisher = forms.ModelChoiceField(queryset=publisher.objects.all(), label= "Publisher")
-    
+    library_location = forms.ModelChoiceField(queryset=library_location.objects.all(), label= "Library")
+
+    stock = forms.IntegerField(label= "Number of Book")
     total_page = forms.IntegerField(required=False, label= "Total Page")
     isbn = forms.CharField(required=False, label= "ISBN")
     published_date = forms.DateField(required=False, label= "Published Date", widget=forms.DateInput(attrs={'type': 'date'}))
     
     # python constructor
-    def __init__(self, *args, **kwargs):
+    def __init__(self, user, *args, **kwargs):
         super(form_edit_book, self).__init__(*args, **kwargs)
         # Customize the label of each choice in the dropdown
         self.fields['author'].label_from_instance = self.label_from_author_instance
+
+        if user.role == 'admin':
+            admin_libraries = admin_library.objects.filter(user=user)
+            library_locations = [admin_lib.library_location for admin_lib in admin_libraries]
+            self.fields['library_location'].queryset = library_location.objects.filter(name__in=library_locations)
 
     def label_from_author_instance(self, obj):
         # Customize how each author instance is displayed in the dropdown
@@ -151,5 +151,6 @@ class form_edit_book(forms.ModelForm):
     
     class Meta:
         model = book
-        fields = ['tittle', 'author', 'genre', 'publisher', 'total_page', 'isbn', 'published_date', 'is_active']
+        fields = ['tittle', 'author', 'genre', 'publisher','library_location', 'stock',
+                   'total_page', 'isbn', 'published_date']
 #endregion ================================= BOOK AREA ==========================================================================
