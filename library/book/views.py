@@ -4,7 +4,6 @@ from .models import author as auth, genre, publisher, book
 from managementUser.models import admin_library
 from .form import form_create_author, form_edit_author, form_create_genre, form_edit_genre
 from .form import form_create_publisher, form_edit_publisher, form_create_book, form_edit_book
-from .form import form_create_stock
 # Create your views here.
 
 #region ================================= AUTHOR AREA ==========================================================================

@@ -45,13 +45,3 @@ class book(models.Model):
 
     def __str__(self):
         return self.tittle
-
-class stock(models.Model):
-    book = models.ForeignKey(book, on_delete=models.CASCADE)
-    library_location = models.ForeignKey(library_location, on_delete=models.CASCADE)
-    stock = models.IntegerField(default=0)
-    decsription = models.CharField(max_length=200, null = True)
-    is_active = models.BooleanField(default= True)
-
-    def __str__(self):
-        return "Stock " + str(self.book.tittle) + " in " + str(self.library_location.name)
