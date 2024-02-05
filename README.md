@@ -33,6 +33,20 @@ BookBorrow is a web-based application built using Django and styled with Bootstr
     - CRUD Book
         - Delete Only for superadmin
         - Create and Update only for superadmin and admin
+- Borrow Book
+    - CRUD Borrow
+        - Create Borrow request
+            - Only if stock book more than 0
+        - Read and delete Borrow Request
+            - The user can only read and delete requests from him
+            - Admin library can only read and delete requests from his authorization
+        - Update approval request
+            - Admin library can only approve requests from his authorization
+        - Read borrowed book and return book
+            - The user can only read borrowed book from him
+            - Admin library can only read borrowed book from his authorization
+        - Update return request
+            - Admin library can only approve requests from his authorization
 
 ## Technologies Used
 

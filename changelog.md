@@ -2,6 +2,51 @@
 <b>Full Changelog</b>
 
 ---
+#### v 0.0.7 -- 2024/02/05
+###### New:
+* Make django app (borrow)
+* Add model (borrow/borrow)
+* Add model (borrow/borrow) to admin
+
+* API (views)
+    * borrow/borrow_create
+    * borrow/borrow_request_read
+    * borrow/borrow_request_delete
+    * borrow/borrow_approval
+    * borrow/borrow_approval_read
+    * borrow/borrow_return_read
+    * borrow/borrow_return
+* urls
+    * borrow/<int:id>/
+    * borrow/request/
+    * borrow/request/<int:id>/delete/ 
+    * borrow/request/<int:id>/
+    * borrow/approved/
+    * borrow/return/
+    * borrow/return/<int:id>/
+* Templates 
+    * borrow/borrow_create
+    * borrow/borrow_request_read
+    * borrow/borrowed_book_read
+    * borrow/return_book_read
+
+###### Change:
+* Templates 
+    * book/book_read
+        * Delete authorization in table header 'action'
+        * Add button borrow
+    * register\base.html
+        * Add Book Management sidebar with submenu
+            * Submenu Book Request
+            * Submenu Borrowed Book
+            * Submenu Return Book
+* Lainnya :
+    * settings.py 
+        * Add INSTALLED_APPS ['borrow.apps.BorrowConfig', ]
+    * library\urls.py
+        * Add path('borrow/', include("borrow.urls")),
+
+---
 #### v 0.0.6 -- 2024/02/04
 ###### New:
 

@@ -90,6 +90,24 @@
                 </ul>
             </li>
 
+            <li class="mb-1">
+              <a href="#bookManagementSubMenu" data-bs-toggle="collapse" class="nav-link link-light rounded">
+                  <i class="fas fa-book text-white"></i> <!-- Catalog icon with text-white class -->
+                  Book Management
+                  <i class="fas fa-chevron-down float-end text-white"></i> <!-- Submenu indicator icon styled as white -->
+              </a>
+
+              <ul class="collapse list-unstyled" id="bookManagementSubMenu">
+                <li><a href="/borrow/request" class="link-light rounded">Book Request</a></li>
+              </ul>
+              <ul class="collapse list-unstyled" id="bookManagementSubMenu">
+                <li><a href="/borrow/approved" class="link-light rounded">Borrowed Book</a></li>
+              </ul>
+              <ul class="collapse list-unstyled" id="bookManagementSubMenu">
+                <li><a href="/borrow/return" class="link-light rounded">Return Book</a></li>
+              </ul>
+          </li>
+
             {% if user.role == 'superadmin' %}
             <li class="mb-1">
               <a href="/user" class="link-light rounded">

@@ -1,0 +1,25 @@
+{% extends 'register/base.html'%}
+
+{% block tittle %}
+Borrow
+{% endblock %}
+
+
+{% block content %}
+
+<h1>{{ book.tittle }}</h1>
+    <p> Author: {{ book.author }} <br> 
+        Genre : {{ book.genre }} <br> 
+        Publisher : {{ book.publisher }} <br> 
+        Total Page : {{ book.total_page|default:'-' }} <br>
+        ISBN : {{ book.isbn|default:'-' }} <br> 
+        Location : {{ book.library_location }} <br> 
+        Availability : {{ book.stock }} <br> 
+    </p>
+
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" name="add_borrow" value="add_borrow" class="btn btn-success">Borrow</button>
+</form>
+{% endblock %}

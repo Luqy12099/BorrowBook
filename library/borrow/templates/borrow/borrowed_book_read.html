@@ -1,0 +1,79 @@
+{% extends 'register/base.html'%}
+
+{% block tittle %}
+Borrowed Book
+ 
+{% endblock %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-8">
+        <h1 class="m-0 text-dark">{{ header_content }}</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-4" style="padding-top: 10px;">
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+
+<section class="content">
+<div class="container-fluid">
+
+<table id = "myTable" class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th scope="col">No</th>
+        {% if user.role == 'superadmin' or user.role == 'admin' %}
+        <th scope="col">User</th>
+        {% endif %}
+        <th scope="col">Book</th>
+        <th scope="col">Borrowed date</th>
+        <th scope="col">Return Date</th>
+        <th scope="col">Approval Status</th>
+        <th scope="col">Return Status</th>
+        {% if user.role == 'superadmin' or user.role == 'admin' %}
+        <th scope="col">Action</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+        {% for item in data %}
+        {% with forloop.counter as n %}
+        <tr>
+            <th scope="row">{{ n }}</th>
+            {% if user.role == 'superadmin' or user.role == 'admin' %}
+            <td>{{ item.user }}</td>
+            {% endif %}
+            <td>{{ item.book }}</td>
+            <td>{{ item.borrow_request_date }}</td>
+            <td>{{ item.return_date }}</td>
+            <td>{{ item.is_approved }}</td>
+            <td>{{ item.is_returned }}</td>
+            
+            <td>
+              {% if user.role == 'superadmin' or user.role == 'admin' %}
+              <div class="btn-group">
+                <form method="POST" action="{% url 'borrow_return' id=item.id %}"><!--  -->
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-primary btn-sm ml-1">
+                  <i class="nav-icon fas fa-check"></i> Return</button>
+                </form>
+              {% endif %}
+            </td>
+            
+        </tr>
+        {% endwith %}
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
+</section>
+
+
+{% endblock %}
+

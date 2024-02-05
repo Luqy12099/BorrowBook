@@ -32,9 +32,7 @@ Book
         <th scope="col">No</th>
         <th scope="col">Tittle Book</th>
         <th scope="col">Detail</th>
-        {% if user.role == 'superadmin' or user.role == 'admin' %}
         <th scope="col">Action</th>
-        {% endif %}
       </tr>
     </thead>
     <tbody>
@@ -53,9 +51,14 @@ Book
               Availability : {{ item.stock }} <br> 
             </td>
   
-            {% if user.role == 'superadmin' or user.role == 'admin' %}
+            
             <td>
               <div class="btn-group">
+                <a href="http://127.0.0.1:8000/borrow/{{item.id}}" class="btn btn-primary btn-sm">
+                  <i class="nav-icon fas fa-check"></i> Borrow
+                </a>
+
+                {% if user.role == 'superadmin' or user.role == 'admin' %}
                 <a href="http://127.0.0.1:8000/book/{{item.id}}" class="btn btn-primary btn-sm">
                     <i class="nav-icon fas fa-edit"></i> Edit
                 </a>
@@ -65,9 +68,10 @@ Book
                   <button type="submit" class="btn btn-danger btn-sm ml-1" onclick="return confirm('Anda Yakin?')">
                   <i class="nav-icon fas fa-trash"></i> Delete</button>
                 </form>
+                {% endif %}
             </div>
             </td>
-            {% endif %}
+            
         </tr>
         {% endwith %}
         {% endfor %}

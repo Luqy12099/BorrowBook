@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'register.apps.RegisterConfig',
     'location.apps.LocationConfig',
     'managementUser.apps.ManagementuserConfig',
-    'book.apps.BookConfig', 
+    'book.apps.BookConfig',
+    'borrow.apps.BorrowConfig', 
     
     "crispy_forms", 
     "crispy_bootstrap4",

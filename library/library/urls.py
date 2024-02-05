@@ -24,4 +24,5 @@ urlpatterns = [
     path('user/', include("managementUser.urls")),
     path('location/', include("location.urls")),
     path('', include("book.urls")),
+    path('borrow/', include("borrow.urls")),
 ]
