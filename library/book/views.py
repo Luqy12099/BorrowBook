@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+import os
+from time import strftime
 from .models import author as auth, genre, publisher, book
 from managementUser.models import admin_library
 from .form import form_create_author, form_edit_author, form_create_genre, form_edit_genre
@@ -197,7 +199,7 @@ def book_create(response):
         return HttpResponseRedirect('/')
     
     if response.method == "POST":
-        form = form_create_book(data = response.POST, user=response.user)
+        form = form_create_book(response.user, response.POST, response.FILES)
         if form.is_valid():
             instance = form.save(commit=False)  # Prevent premature saving
 
@@ -206,6 +208,13 @@ def book_create(response):
                 admin_lib = admin_library.objects.filter(user=response.user).first()
                 if admin_lib.library_location != instance.library_location:
                     return redirect('book_read')
+
+            # Change name 
+            if 'cover' in response.FILES:
+                cover_file = response.FILES['cover']
+                time = strftime("%Y%m%d_%H%M%S")
+                new_cover_name = f"cover_{time}{os.path.splitext(cover_file.name)[1]}"
+                instance.cover.name = new_cover_name
                 
             instance.save()
             

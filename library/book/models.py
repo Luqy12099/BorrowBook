@@ -41,6 +41,7 @@ class book(models.Model):
     total_page = models.IntegerField(null= True)
     isbn = models.CharField(max_length=50, null= True)
     published_date = models.DateField(null= True)
+    cover = models.ImageField(upload_to = 'images/cover/', null= True)
     is_active = models.BooleanField(default= True, help_text= "0 not active; 1 active")
 
     def __str__(self):

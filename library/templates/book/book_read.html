@@ -42,6 +42,10 @@ Book
             <th scope="row">{{ n }}</th>
             <td>{{ item.tittle }}</td>
             <td>
+              {% if item.cover %}
+              <img src="{{ item.cover.url }}" alt="Book Cover" style="max-width: 200px;">  
+              <br> 
+              {% endif %}
               Author : {{ item.author }} <br> 
               Genre : {{ item.genre }} <br> 
               Publisher : {{ item.publisher }} <br> 

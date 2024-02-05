@@ -1,5 +1,36 @@
-### Changelog `Todolist`
+### Changelog `Borrow Book`
 <b>Full Changelog</b>
+
+---
+#### v 0.0.8 -- 2024/02/05
+###### New:
+* Add library pillow
+
+###### Change:
+* API (views):
+    * book/book_create
+        * Change form = form_create_book(response.user, response.POST, response.FILES)
+        * Add changing name file
+* Templates 
+    * book/book_read
+        * Add cover in detail
+    * book/book_create
+        * Add enctype="multipart/form-data"
+
+* Lainnya :
+    * Integrate all templates app into 1 folder
+    * settings.py 
+        * Change BASE_DIR
+        * Change NAME DATABASE
+        * Add DIRS in templates 
+    * library\urls.py
+        * Add urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
+    * book\model\book
+        * Add field cover
+    * book\form\form_create_book
+        * Delete Author label
+    * book\form\form_edit_book
+        * Delete Author label
 
 ---
 #### v 0.0.7 -- 2024/02/05

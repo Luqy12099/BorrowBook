@@ -1,3 +1,4 @@
 *.pyc
 venv*/
 library/db.sqlite3
+library/media/images/cover*/
