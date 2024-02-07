@@ -130,7 +130,8 @@ class form_edit_book(forms.ModelForm):
     total_page = forms.IntegerField(required=False, label= "Total Page")
     isbn = forms.CharField(required=False, label= "ISBN")
     published_date = forms.DateField(required=False, label= "Published Date", widget=forms.DateInput(attrs={'type': 'date'}))
-    
+    cover = forms.ImageField(required=False, label= "Cover", widget=forms.FileInput(attrs={'accept': 'image/*'}))
+
     # python constructor
     def __init__(self, user, *args, **kwargs):
         super(form_edit_book, self).__init__(*args, **kwargs)
@@ -143,5 +144,5 @@ class form_edit_book(forms.ModelForm):
     class Meta:
         model = book
         fields = ['tittle', 'author', 'genre', 'publisher','library_location', 'stock',
-                   'total_page', 'isbn', 'published_date']
+                   'total_page', 'isbn', 'published_date', 'cover', 'is_active']
 #endregion ================================= BOOK AREA ==========================================================================

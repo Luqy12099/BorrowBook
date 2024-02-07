@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 import os
+from django.core.files.storage import default_storage
 from time import strftime
 from .models import author as auth, genre, publisher, book
 from managementUser.models import admin_library
@@ -227,6 +228,7 @@ def book_create(response):
 @login_required()
 def book_update(response, id):
     data = get_object_or_404(book, id=id)
+    url = data.cover.name
 
     #Authorisation (Note: Change more specific)
     author = ['superadmin', 'admin']
@@ -238,13 +240,25 @@ def book_update(response, id):
         if admin_lib.library_location != data.library_location:
             return redirect('book_read')
     
-    form = form_edit_book(data = response.POST or None, instance=data , user=response.user)
     if response.method =="POST":
+        form = form_edit_book(data = response.POST, files=response.FILES, instance=data , user=response.user)
         if form.is_valid():
             instance = form.save(commit=False)  # Prevent premature saving
 
+            # Change name 
+            if 'cover' in response.FILES:
+                if instance.cover:
+                    default_storage.delete(url)
+
+                cover_file = response.FILES['cover']
+                time = strftime("%Y%m%d_%H%M%S")
+                new_cover_name = f"cover_{time}{os.path.splitext(cover_file.name)[1]}"
+                instance.cover.name = new_cover_name
+
             instance.save()
             return redirect('book_read')
+    else:
+        form = form_edit_book(instance=data , user=response.user)
     
     return render(response, "book/book_edit.html", {"form":form, "data":data})
 

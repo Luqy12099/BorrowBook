@@ -2,6 +2,22 @@
 <b>Full Changelog</b>
 
 ---
+#### v 0.0.9 -- 2024/02/09
+###### New:
+###### Change:
+* API (views):
+    * book/book_update
+        * Add changing name file cover
+        * Add argument form = form_edit_book(data = response.POST, files=response.FILES, instance=data , user=response.user)
+
+* Templates 
+    * book/book_edit
+        * Add enctype="multipart/form-data"
+
+* Lainnya :
+    * book\form\form_edit_book
+        * Add Field cover
+---
 #### v 0.0.8 -- 2024/02/05
 ###### New:
 * Add library pillow
@@ -29,6 +45,7 @@
         * Add field cover
     * book\form\form_create_book
         * Delete Author label
+        * Add Field cover
     * book\form\form_edit_book
         * Delete Author label
 
